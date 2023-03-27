@@ -1,5 +1,6 @@
 package Utils;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,7 +23,11 @@ public class StreamUtilsTest {
 		}
 		InputStream is = new ByteArrayInputStream(data.toString().getBytes("UTF-8"));
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		StreamUtils.chain(is, os);
+		BufferedOutputStream bos = new BufferedOutputStream(os);
+		StreamUtils.chain(is, bos);
+		is.close();
+		bos.close();
+		os.close();
 		System.out.println("before assert");
 		Assertions.assertEquals(data.toString(),os.toString("UTF-8"));
 	}

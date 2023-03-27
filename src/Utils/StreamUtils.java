@@ -1,13 +1,8 @@
 package Utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Random;
-
-import org.junit.jupiter.api.Assertions;
 
 public class StreamUtils {
 
@@ -27,7 +22,7 @@ public class StreamUtils {
 		return bufferOffset;
 	}
 
-	static void chain(InputStream is, OutputStream os) throws IOException {
+	static void chain(InputStream is, BufferedOutputStream os) throws IOException {
 		byte[] inputData = new byte[1024];
 		abort = false;
 		for(int readCount; (readCount = readInputStreamWithTimeout(is, inputData, 6000)) > 0;) {
